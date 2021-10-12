@@ -1,18 +1,33 @@
-require('dotenv').config()
+require("dotenv").config()
+const express = require("express") 
+const morgan = require("morgan")
+const methodOverride = require("method-override")
+const Animal = require("./models/zoo")
+const AnimalRouter = require("./controllers/zoo")
+const UserRouter = require("./controllers/user")
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const mongoose = require("mongoose");
+const app = express()
 
-//___________________
-//Dependencies
-//___________________
-const express = require('express');
-const methodOverride = require('method-override');
-const mongoose = require ('mongoose');
-const app = express();
-const db = mongoose.connection;
-//___________________
+//Middleware
+app.use(morgan('tiny'))
+app.use(methodOverride('_method'))
+app.use(express.urlencoded({extended: true}))
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true}));
+app.use(session({
+    secret: process.env.SECRET,
+    store: MongoStore.create({mongoUrl: process.env.MONGODB_URI}),
+    saveUninitialized: true,
+    resave: false,
+  }))
+
+  app.use("/zoo", AnimalRouter)
+  app.use("/user", UserRouter) 
 //Port
 //___________________
 // Allow use of Heroku's port or your own local port, depending on the environment
-const PORT = process.env.PORT || 3000;
 
 //___________________
 //Database
@@ -22,17 +37,14 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 // Connect to Mongo &
 // Fix Depreciation Warnings from Mongoose
-// May or may not need these depending on your Mongoose version
+
 mongoose.connect(MONGODB_URI , { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Error / success
-db.on('error', (err) => console.log(err.message + ' is mongod not running?'));
-db.on('connected', () => console.log('mongod connected: ', MONGODB_URI));
-db.on('disconnected', () => console.log('mongod disconnected'));
+// db.on('error', (err) => console.log(err.message + ' is mongod not running?'));
+// db.on('connected', () => console.log('mongod connected: ', MONGODB_URI));
+// db.on('disconnected', () => console.log('mongod disconnected'));
 
-//___________________
-//Middleware
-//___________________
 
 //use public folder for static assets
 app.use(express.static('public'));
@@ -50,10 +62,11 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 //___________________
 //localhost:3000
 app.get('/' , (req, res) => {
-  res.send('Hello World!');
+  res.render("index.ejs");
 });
 
 //___________________
 //Listener
 //___________________
-app.listen(PORT, () => console.log('express is listening on:', PORT));
+const PORT = process.env.PORT
+app.listen(PORT, () => console.log(`express is listening on ${PORT}`));

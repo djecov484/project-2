@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<%- include("../partials/head.ejs") %>
+
+<body>
+    <%- include("../partials/header.ejs") %>
+
+    
+    <main>
+      
+        <div>
+          <a href="/zoo/new"><button>Create a New animal</button></a>
+          <a href="/user/logout"><button>Logout</button></a>
+          <a href="/zoo/DONATE"><button>DONATE</button></a>
+          <link href="style.css" rel="stylesheet" type="style/css">
+
+          
+            <% for (animal of animals) { %>
+               <article>
+                 <a href="/zoo/<%= animal.id %>"> 
+
+                    <h2>
+                        <%=  animal.name %> 
+                    </h2>
+                    <img src= <%= animal.img %>></img>
+                 </a>  
+                  
+                         
+            </article>
+                
+              
+
+                <% } %>
+        </div>
+        
+    </main>
+
+
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link href="style.css" rel="stylesheet" type="style/css">
+
+<%- include("../partials/head.ejs") %>
+
+<body id="test">
+    <%- include("../partials/header.ejs") %>
+    <maim>
+        <div>
+          
+
+                <article>
+                    <h2> <%= animal.name %> </h2>
+                    <h3><%= animal.extinct %></h3>
+                    <h3><%= animal.location %></h3>
+                    <h3><%= animal.life %></h3>
+                   
+                       <a href="/animals/<%= animal._id %>/edit"><button>Edit</button></a>
+                       <form action="/animals/<%= animal._id %>?_method=DELETE " method="post">
+                       <input type="submit" value="Delete" />
+                       
+          </form>
+                </article>
+        </div>
+    </maim>
