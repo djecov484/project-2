@@ -81,7 +81,7 @@ router.post("/", (req, res) => {
 router.get("/:id/edit", (req, res) => {
     const id = req.params.id
     console.log(id)
-    Animal.findById(id, (err, animal) => {
+    Animal.findById(id, (err, zoo) => {
         res.render("zoo/edit.ejs", {zoo})
     })
 })
@@ -91,7 +91,7 @@ router.put("/:id", (req, res) => {
     const id = req.params.id
     req.body.extinct = req.body.extinct === "on" ? true : false
     Animal.findByIdAndUpdate(id, req.body, {new: true}, (err, fruit) => {
-        res.redirect("/animals")
+        res.redirect("/zoo")
     })
 })
 
@@ -99,7 +99,7 @@ router.put("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
     const id = req.params.id
     Animal.findByIdAndRemove(id, (err, animal) => {
-        res.redirect("/animals")
+        res.redirect("/zoo")
     })
 })
 //Show route

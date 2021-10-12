@@ -8,9 +8,9 @@
     <%- include("../partials/header.ejs") %>
     <main>
       <div>
-        <form action="/animals/<%= animal._id %>?_method=PUT" method="post">
+        <form action="/zoo/<%= zoo._id %>?_method=PUT" method="post">
           <fieldset>
-            <legend>Edit a <%= animal.name %></legend>
+            <legend>Edit a <%= zoo.name %></legend>
             <label>
               NAME:<input
                 type="text"
@@ -22,7 +22,7 @@
               EXTINCT:
               <input type="checkbox" 
               name="extinct"
-              <%= animal.extinct ? "checked" : "" %> />
+              <%= zoo.extinct ? "checked" : "" %> />
               <label> 
                 LOCATION:<input
                 type="text"
@@ -36,7 +36,7 @@
                 placeholder="enter animal life"
             </label>
           </fieldset>
-          <input type="submit" value="Update <%= animal.name %>" />
+          <input type="submit" value="Update <%= zoo.name %>" />
         </form>
       </div>
     </main>

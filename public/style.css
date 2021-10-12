@@ -1,7 +1,7 @@
 
  body {
     background: url(https://wallpapercave.com/wp/wp3165336.jpg) no-repeat;
-    background-size: 100% 190%;
+    background-size: cover;
     text-align: start;
     position: relative; top: 50px;
     font-weight: bold;
@@ -9,11 +9,15 @@
   }
  
   h2 {
-      color: white;
+    color: white;
     text-align: center;
-    position: relative; top: 0px;
+    position: relative;
+    top: 0px;
     padding: 14px;
     background-color: sienna;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
   }
  
   div h1 {
@@ -80,4 +84,11 @@
 
  }
 
- 
+ input {
+     width: 20% !important;
+     
+ }
+label {
+    
+    margin-right: 100px;
+}

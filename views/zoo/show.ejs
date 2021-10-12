@@ -16,8 +16,8 @@
                     <h3><%= animal.location %></h3>
                     <h3><%= animal.life %></h3>
                    
-                       <a href="/animals/<%= animal._id %>/edit"><button>Edit</button></a>
-                       <form action="/animals/<%= animal._id %>?_method=DELETE " method="post">
+                       <a href="/zoo/<%= animal._id %>/edit"><button>Edit</button></a>
+                       <form action="/zoo/<%= animal._id %>?_method=DELETE " method="post">
                        <input type="submit" value="Delete" />
                        
           </form>
